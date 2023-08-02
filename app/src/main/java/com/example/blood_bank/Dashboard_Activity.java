@@ -11,5 +11,9 @@ public class Dashboard_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        hosp = findViewById(R.id.dash_hospital);
+        blood = findViewById(R.id.dash_bloodGroup);
+        donor = findViewById(R.id.dash_donor);
+        help = findViewById(R.id.dash_help);
     }
 }
