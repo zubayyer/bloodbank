@@ -113,70 +113,7 @@ public class UserLoginActivity extends AppCompatActivity {
                                 progresBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
                                     Toast.makeText(UserLoginActivity.this, "Run", Toast.LENGTH_SHORT).show();
-                                    if(userr.equals("Donor")){
-                                        DatabaseReference dbr = FirebaseDatabase.getInstance().getReference("donor");
-                                        Query checkdonor = dbr.orderByChild("email").equalTo("Email");
-                                        checkdonor.addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                if(snapshot.exists()){
-                                                    emaill.setError(null);
-                                                    String pswdDonor = snapshot.child(Email).child("password").getValue(String.class);
-                                                    if(!Objects.equals(pswdDonor,Password)){
-                                                        emaill.setError(null);
-                                                        Toast.makeText(UserLoginActivity.this, "Donor Login Succefull.",Toast.LENGTH_SHORT).show();
-                                                        Intent i = new Intent(UserLoginActivity.this,MainActivity.class);
-                                                        startActivity(i);
-                                                        finish();
-                                                    }
-                                                    else {
-                                                        pswd.setError("Invalid Credential");
-                                                        pswd.requestFocus();
-                                                    }
-                                                }
-                                                else{
-                                                    emaill.setError("Invalid User");
-                                                    emaill.requestFocus();
-                                                }
-                                            }
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
-                                            }
-                                        });
-                                    }
-                                    else if(userr.equals("Acceptor")){
-                                        DatabaseReference dbr = FirebaseDatabase.getInstance().getReference("user");
-                                        Query checkdonor = dbr.orderByChild("email").equalTo("Email");
-                                        checkdonor.addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                if(snapshot.exists()){
-                                                    emaill.setError(null);
-                                                    String pswduser = snapshot.child(Email).child("password").getValue(String.class);
-                                                    if(!Objects.equals(pswduser,Password)){
-                                                        emaill.setError(null);
-                                                        Toast.makeText(UserLoginActivity.this, "Acceptor Login Succefully.",Toast.LENGTH_SHORT).show();
-                                                        Intent i = new Intent(UserLoginActivity.this,MainActivity.class);
-                                                        startActivity(i);
-                                                        finish();
-                                                    }
-                                                    else {
-                                                        pswd.setError("Invalid Credential");
-                                                        pswd.requestFocus();
-                                                    }
-                                                }
-                                                else{
-                                                    emaill.setError("Invalid User");
-                                                    emaill.requestFocus();
-                                                }
-                                            }
 
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
-
-                                            }
-                                        });
-                                    }
                                 } else {
                                     Toast.makeText(UserLoginActivity.this, "The ERROR is : "+task.getException().toString(),Toast.LENGTH_SHORT).show();
                                     Log.d( "onComplete: ",task.getException().toString());
