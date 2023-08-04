@@ -40,6 +40,12 @@ public class BloodGroup_ShowActivity extends AppCompatActivity {
         DBref = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+
+        recycle = findViewById(R.id.recyclerViewBlood);
+        recycle.setLayoutManager(new LinearLayoutManager(this));
+        //        RecyclerView.setHasFixedSize(true);
+        bloodArray = new ArrayList<>();
+
         if(currentUser == null){
             Intent i = new Intent(BloodGroup_ShowActivity.this, UserLoginActivity.class);
             startActivity(i);
@@ -47,11 +53,6 @@ public class BloodGroup_ShowActivity extends AppCompatActivity {
         } else {
             logout.setText("LOG OUT    :      "+ currentUser.getEmail());
         }
-
-        recycle = findViewById(R.id.recyclerViewBlood);
-        recycle.setLayoutManager(new LinearLayoutManager(this));
-        //        RecyclerView.setHasFixedSize(true);
-        bloodArray = new ArrayList<>();
         readData();
     }
     private void readData() {
