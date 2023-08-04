@@ -25,9 +25,7 @@ public class bloodbankAdapter extends RecyclerView.Adapter<bloodbankAdapter.View
         this.bloodbankArray = bloodbankArray;
     }
 
-    public bloodbankAdapter(ArrayList<bloodbankClass> bloodbankArray) {
-        this.bloodbankArray = bloodbankArray;
-    }
+
 
     @NonNull
     @Override

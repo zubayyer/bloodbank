@@ -153,8 +153,8 @@ public class UserLoginActivity extends AppCompatActivity {
             adpt1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             blood.setAdapter(adpt1);
 
-            Button add = dialog.findViewById(R.id.bloodbank_AddBtn);
-            Button exit = dialog.findViewById(R.id.bloodbank_ExitBtn);
+            AppCompatButton add = dialog.findViewById(R.id.bloodbank_AddBtn);
+            AppCompatButton exit = dialog.findViewById(R.id.bloodbank_ExitBtn);
             exit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
