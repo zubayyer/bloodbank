@@ -1,19 +1,22 @@
 package com.example.blood_bank;
 
 public class bloodClass {
-    String Name;
+    String BloodGroup;
 
     public bloodClass() {
     }
-    public bloodClass(String BloodGroup){
-        this.Name = BloodGroup;
+
+    public bloodClass(String bloodGroup) {
+        BloodGroup = bloodGroup;
     }
 
-    public String getName() {
-        return Name;
+    public String getBloodGroup() {
+        return BloodGroup;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setBloodGroup(String bloodGroup) {
+        BloodGroup = bloodGroup;
     }
 }
+
+

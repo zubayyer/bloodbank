@@ -15,12 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.blood_bank.R;
 import com.example.blood_bank.Show.BloodBank_ShowActivity;
 import com.example.blood_bank.bloodbankClass;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
 public class bloodbankAdapter extends RecyclerView.Adapter<bloodbankAdapter.Viewholder> {
     ArrayList<bloodbankClass> bloodbankArray;
-
+    FirebaseUser currentUser;
+    FirebaseAuth mAuth;
     public bloodbankAdapter(BloodBank_ShowActivity context, ArrayList<bloodbankClass> bloodbankArray) {
         this.bloodbankArray = bloodbankArray;
     }
@@ -36,6 +39,9 @@ public class bloodbankAdapter extends RecyclerView.Adapter<bloodbankAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+
 //        final String bbId = ""+bloodbankArray.get(position).getId();
         holder.bbname.setText(bloodbankArray.get(position).getBloodBank());
         holder.bbemail.setText(bloodbankArray.get(position).getEmail());
@@ -50,7 +56,7 @@ public class bloodbankAdapter extends RecyclerView.Adapter<bloodbankAdapter.View
                 Uri format = Uri.parse(("mailto" + Email));
                 Intent i = new Intent(Intent.ACTION_SENDTO,format);
                 i.putExtra(Intent.EXTRA_SUBJECT,"Request for blood");
-                i.putExtra(Intent.EXTRA_EMAIL,"Hi, i am --- i need this --- blood group");
+                i.putExtra(Intent.EXTRA_EMAIL,"Hi, i am "+currentUser+" i need this (-"+bloodbankArray.get(position).getBloodBank()+"- blood group");
                 Intent.createChooser(i,"Send Email");
                 view.getContext().startActivity(Intent.createChooser(i,"Send Email"));
             }

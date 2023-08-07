@@ -95,16 +95,10 @@
 
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:id="@+id/share"
-            android:tooltipText="Share"
-            android:src="@drawable/ic_baseline_share_24"/>
-
-        <ImageView
             android:tooltipText="Call"
             android:layout_width="40dp"
             android:id="@+id/call"
+            android:layout_marginRight="15dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_baseline_call_24"/>
 

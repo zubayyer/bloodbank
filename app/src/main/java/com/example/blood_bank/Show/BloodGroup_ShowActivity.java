@@ -66,6 +66,7 @@ public class BloodGroup_ShowActivity extends AppCompatActivity {
                     bloodArray.add(users);
                 }
                 Log.e("abc",bloodArray.size()+"");
+                Log.d( "onDataChangemmmmmmmmm: ",bloodArray.get(0).toString());
                 adapter = new bloodAdapter(BloodGroup_ShowActivity.this,bloodArray);
                 recycle.setAdapter(adapter);
                 adapter.notifyDataSetChanged();

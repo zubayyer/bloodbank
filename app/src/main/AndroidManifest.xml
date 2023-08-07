@@ -35,9 +35,6 @@
             android:name=".Show.BloodBank_ShowActivity"
             android:exported="false" />
         <activity
-            android:name=".Register.UserRegisterActivity"
-            android:exported="false" />
-        <activity
             android:name=".Register.UserLoginActivity"
             android:exported="true" />
         <activity

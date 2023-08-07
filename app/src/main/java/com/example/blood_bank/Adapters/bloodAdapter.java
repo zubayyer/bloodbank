@@ -15,7 +15,6 @@ import com.example.blood_bank.bloodClass;
 import java.util.ArrayList;
 public class bloodAdapter extends RecyclerView.Adapter<bloodAdapter.innerDonor> {
     ArrayList<bloodClass> bloodArray;
-
     public bloodAdapter(BloodGroup_ShowActivity bloodGroup_showActivity, ArrayList<bloodClass> bloodArray) {
         this.bloodArray = bloodArray;
     }
@@ -29,7 +28,7 @@ public class bloodAdapter extends RecyclerView.Adapter<bloodAdapter.innerDonor> 
 
     @Override
     public void onBindViewHolder(@NonNull innerDonor holder, int position) {
-        holder.Bname.setText(bloodArray.get(position).getName());
+        holder.Bname.setText(bloodArray.get(position).getBloodGroup());
     }
 
     @Override
