@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.blood_bank.Adapters.bloodbankAdapter;
+import com.example.blood_bank.Dashboard_Activity;
 import com.example.blood_bank.R;
 import com.example.blood_bank.Register.UserLoginActivity;
 import com.example.blood_bank.bloodbankClass;
@@ -37,7 +38,7 @@ public class BloodBank_ShowActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blood_bank_show);
-        AppCompatButton logout = findViewById(R.id.buttonlogOUtt);
+        AppCompatButton back = findViewById(R.id.buttonlogOUtt);
         DBref = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
@@ -46,18 +47,15 @@ public class BloodBank_ShowActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         }
-        else {
-            logout.setText("LOG OUT    :      "+ currentUser.getEmail());
-        }
-        logout.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                Intent i = new Intent(BloodBank_ShowActivity.this,UserLoginActivity.class);
+                Intent i = new Intent(BloodBank_ShowActivity.this, Dashboard_Activity.class);
                 startActivity(i);
                 finish();
             }
         });
+
         recycle = findViewById(R.id.recyclerView);
         recycle.setLayoutManager(new LinearLayoutManager(this));
         //        RecyclerView.setHasFixedSize(true);

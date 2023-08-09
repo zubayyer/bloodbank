@@ -84,12 +84,12 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/acceptorLL"
         android:layout_alignParentEnd="true"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_marginStart="10dp"
-        android:id="@+id/icons"
         android:gravity="right"
         >
 
@@ -109,7 +109,35 @@
             android:layout_height="match_parent"
             android:src="@drawable/baseline_email_24"/>
 
-
     </LinearLayout>
+
+<!--    <LinearLayout-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:id="@+id/donorLL"-->
+<!--        android:gravity="right"-->
+<!--        >-->
+
+<!--    <Button-->
+<!--        android:id="@+id/del_donor"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="delete"-->
+<!--        android:backgroundTint="@color/black"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textStyle="bold"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/upd_donor"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="update"-->
+<!--        android:backgroundTint="@color/black"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textStyle="bold"/>-->
+<!--    </LinearLayout>-->
 
 </RelativeLayout>

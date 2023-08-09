@@ -10,8 +10,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.example.blood_bank.Adapters.donorAdapter;
+import com.example.blood_bank.Dashboard_Activity;
 import com.example.blood_bank.R;
 import com.example.blood_bank.Register.UserLoginActivity;
 import com.example.blood_bank.donorClass;
@@ -36,7 +38,7 @@ public class Donors_ShowActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donors_show);
-        AppCompatButton logout = findViewById(R.id.buttonlogOUtt);
+        AppCompatButton back = findViewById(R.id.b2DASH);
         DBref = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
@@ -44,9 +46,15 @@ public class Donors_ShowActivity extends AppCompatActivity {
             Intent i = new Intent(Donors_ShowActivity.this, UserLoginActivity.class);
             startActivity(i);
             finish();
-        } else {
-            logout.setText("LOG OUT    :      "+ currentUser.getEmail());
         }
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Donors_ShowActivity.this, Dashboard_Activity.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
         recycle = findViewById(R.id.recyclerViewDonor);
         recycle.setLayoutManager(new LinearLayoutManager(this));

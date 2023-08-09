@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatSpinner;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.blood_bank.Dashboard_Activity;
 import com.example.blood_bank.R;
 import com.example.blood_bank.Show.BloodBank_ShowActivity;
 import com.example.blood_bank.MainActivity;
@@ -69,12 +71,14 @@ public class UserLoginActivity extends AppCompatActivity {
         btnNewUser = findViewById(R.id.newUser);
         FirebaseUser currentUser = mAuth.getCurrentUser();
 //        Log.e( "uinfo ",currentUser.getDisplayName().toString() );
-        if(currentUser != null) {
 
-            Intent i = new Intent(UserLoginActivity.this, BloodBank_ShowActivity.class);
+        SharedPreferences sh = getSharedPreferences("Donor",MODE_PRIVATE);
+        if (sh.contains("DEmail")){
+            Intent i = new Intent(UserLoginActivity.this, Dashboard_Activity.class);
             startActivity(i);
             finish();
         }
+
         String[] userLogin = {"Donor", "Acceptor"};
         ArrayAdapter adpt = new ArrayAdapter<>(UserLoginActivity.this, android.R.layout.simple_spinner_dropdown_item, userLogin);
         adpt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -113,7 +117,66 @@ public class UserLoginActivity extends AppCompatActivity {
                                 progresBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
                                     Toast.makeText(UserLoginActivity.this, "Run", Toast.LENGTH_SHORT).show();
+                                    if (user.equals("Donor")){
+                                        Query Q = FirebaseDatabase.getInstance().getReference().child("donor").orderByChild("verification").equalTo("verified");
+                                        Q.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                if (snapshot.exists()){
+//                                                    String name = snapshot.getValue(String.class);
+//                                                    Log.d( "onDataChangedfdddd: ",name);
+                                                    Toast.makeText(UserLoginActivity.this, "Donor", Toast.LENGTH_SHORT).show();
+                                                    SharedPreferences sh = getSharedPreferences("Donor",MODE_PRIVATE);
+                                                    SharedPreferences.Editor ed = sh.edit();
+                                                    ed.putString("DEmail",Email);
+                                                    ed.putString("Role","Donor");
+                                                    ed.commit();
+                                                    ed.apply();
 
+                                                    Intent i = new Intent(UserLoginActivity.this, Dashboard_Activity.class);
+                                                    startActivity(i);
+                                                    finish();
+
+                                                }
+                                                else{
+                                                    Toast.makeText(UserLoginActivity.this,"you are not verified", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+                                    }
+
+                                    else if (user.equals("Acceptor")){
+                                        Query Q = FirebaseDatabase.getInstance().getReference().child("user").orderByChild("email").equalTo(Email);
+                                        Q.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                if (snapshot.exists()){
+                                                    Toast.makeText(UserLoginActivity.this, "Acceptor", Toast.LENGTH_SHORT).show();
+                                                    SharedPreferences sh = getSharedPreferences("Donor",MODE_PRIVATE);
+                                                    SharedPreferences.Editor ed = sh.edit();
+                                                    ed.putString("DEmail",Email);
+                                                    ed.putString("Role","Acceptor");
+                                                    ed.commit();
+                                                    ed.apply();
+                                                    Intent i = new Intent(UserLoginActivity.this, Dashboard_Activity.class);
+                                                    startActivity(i);
+                                                    finish();
+                                                }
+                                                else{
+                                                    Toast.makeText(UserLoginActivity.this,"Error", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+                                    }
                                 } else {
                                     Toast.makeText(UserLoginActivity.this, "The ERROR is : "+task.getException().toString(),Toast.LENGTH_SHORT).show();
                                     Log.d( "onComplete: ",task.getException().toString());

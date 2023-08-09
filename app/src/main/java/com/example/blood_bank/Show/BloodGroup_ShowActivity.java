@@ -10,8 +10,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.example.blood_bank.Adapters.bloodAdapter;
+import com.example.blood_bank.Dashboard_Activity;
 import com.example.blood_bank.R;
 import com.example.blood_bank.Register.UserLoginActivity;
 import com.example.blood_bank.bloodClass;
@@ -36,7 +38,7 @@ public class BloodGroup_ShowActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blood_group_show);
-        AppCompatButton logout = findViewById(R.id.buttonlogOUT);
+        AppCompatButton back = findViewById(R.id.buttonlogOUT);
         DBref = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
@@ -50,9 +52,15 @@ public class BloodGroup_ShowActivity extends AppCompatActivity {
             Intent i = new Intent(BloodGroup_ShowActivity.this, UserLoginActivity.class);
             startActivity(i);
             finish();
-        } else {
-            logout.setText("LOG OUT    :      "+ currentUser.getEmail());
         }
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(BloodGroup_ShowActivity.this, Dashboard_Activity.class);
+                startActivity(i);
+                finish();
+            }
+        });
         readData();
     }
     private void readData() {

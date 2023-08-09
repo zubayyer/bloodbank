@@ -6,6 +6,7 @@ String Id,Name,Email,Phone,WhatsApp,Address,Password,User,Blood,Verification;
     public donorClass() {
     }
 
+
     public donorClass(String name, String phone, String address) {
         Name = name;
         Phone = phone;

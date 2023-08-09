@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_log_out"
-        android:text="LOG OUT"
+        android:text="BACK TO DASHBOARD"
         android:textSize="15dp"
         android:textColor="@android:color/white"
         android:fontFamily="sans-serif-condensed-medium"

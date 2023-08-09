@@ -103,18 +103,22 @@
         android:textStyle="bold"
         android:background="@drawable/signup_form_bg"
         />
-    <androidx.appcompat.widget.AppCompatSpinner
+<EditText
         android:id="@+id/update_BG"
         android:layout_marginTop="3dp"
         android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:text="blood group"
         android:layout_height="40dp"
         android:background="@drawable/signup_form_bg"
         />
-    <androidx.appcompat.widget.AppCompatSpinner
+<EditText
         android:id="@+id/update_User"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:textAlignment="center"
+        android:text="user"
+    android:layout_height="40dp"
         android:background="@drawable/signup_form_bg"
         />
 
