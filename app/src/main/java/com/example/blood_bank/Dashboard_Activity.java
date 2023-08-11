@@ -56,6 +56,7 @@ public class Dashboard_Activity extends AppCompatActivity {
     ProgressBar progresBar;
     FirebaseAuth mAuth;
     String uid;
+    AppCompatButton back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,9 +123,9 @@ public class Dashboard_Activity extends AppCompatActivity {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(Dashboard_Activity.this, "kkkkkkkkkkkkkk", Toast.LENGTH_SHORT).show();
                 Dashboard_Activity.viewDialog viewD = new Dashboard_Activity.viewDialog();
                 viewD.showDialog(Dashboard_Activity.this);
-                Toast.makeText(Dashboard_Activity.this, "aaaa   :  "+uid, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -152,38 +153,81 @@ public class Dashboard_Activity extends AppCompatActivity {
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setCancelable(false);
             dialog.setContentView(R.layout.alert_dialog_update);
+            AppCompatButton back = dialog.findViewById(R.id.b2DASH);
 
-            progresBar = findViewById(R.id.update_progBar);
-
-            EditText UPDpass = dialog.findViewById(R.id.update_userpswd);
-            EditText UPDname = dialog.findViewById(R.id.update_userName);
-            EditText UPDphone = dialog.findViewById(R.id.update_userPhone);
-            EditText UPDaddress = dialog.findViewById(R.id.update_userAddress);
-            EditText UPDemail = dialog.findViewById(R.id.update_userEmail);
-            EditText UPDwhats = dialog.findViewById(R.id.update_userWhatsapp);
-            EditText UPDblood = dialog.findViewById(R.id.update_BG);
-            UPDblood.setVisibility(INVISIBLE);
-            EditText UPDuser = dialog.findViewById(R.id.update_User);
-            SharedPreferences sh = getSharedPreferences("Donor",MODE_PRIVATE);
-
-            Query emailQuery = FirebaseDatabase.getInstance().getReference().orderByChild("email").equalTo(sh.getString("DEmail",""));
-            emailQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            back.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot child : snapshot.getChildren()) {
-                        donorClass user = child.getValue(donorClass.class);
-                        uid = user.getName().toString();
-                        Log.d("hhhhhhhhhhh" ,uid);
-                        UPDname.setText(uid);
-                        //Do what you need to do with UID.
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Log.d("TAG", error.getMessage()); //Never ignore potential errors!
+                public void onClick(View view) {
+                    dialog.dismiss();
                 }
             });
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+        }
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//            progresBar = findViewById(R.id.update_progBar);
+//
+//            EditText UPDpass = dialog.findViewById(R.id.update_userpswd);
+//            EditText UPDname = dialog.findViewById(R.id.update_userName);
+//            EditText UPDphone = dialog.findViewById(R.id.update_userPhone);
+//            EditText UPDaddress = dialog.findViewById(R.id.update_userAddress);
+//            EditText UPDemail = dialog.findViewById(R.id.update_userEmail);
+//            EditText UPDwhats = dialog.findViewById(R.id.update_userWhatsapp);
+//            EditText UPDblood = dialog.findViewById(R.id.update_BG);
+//            UPDblood.setVisibility(INVISIBLE);
+//            EditText UPDuser = dialog.findViewById(R.id.update_User);
+//            SharedPreferences sh = getSharedPreferences("Donor",MODE_PRIVATE);
+//
+//            Query emailQuery = FirebaseDatabase.getInstance().getReference().orderByChild("email").equalTo(sh.getString("DEmail",""));
+//            emailQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    for (DataSnapshot child : snapshot.getChildren()) {
+////                        donorClass user = child.getValue(donorClass.class);
+//                        uid = child.child("blood").toString();
+//                        UPDname.setText("mmmmmmm"+uid);
+//
+//                        //Do what you need to do with UID.
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//                    Log.d("TAG", error.getMessage()); //Never ignore potential errors!
+//                }
+//            });
 
 //                AppCompatSpinner UPDblood = dialog.findViewById(R.id.update_BG);
 
@@ -211,17 +255,13 @@ public class Dashboard_Activity extends AppCompatActivity {
 //                adpt1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //                UPDblood.setAdapter(adpt1);
 
-            AppCompatButton add = dialog.findViewById(R.id.update_UpdBtn);
-            AppCompatButton exit = dialog.findViewById(R.id.update_ExitBtn);
-            exit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    dialog.dismiss();
-                }
-            });
-            add.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+//            AppCompatButton add = dialog.findViewById(R.id.update_UpdBtn);
+//            AppCompatButton exit = dialog.findViewById(R.id.update_ExitBtn);
+
+
+//            add.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
 //                    progresBar.setVisibility(View.VISIBLE);
 //                    String Id = upd.getStringExtra("id");
 //                    String Name = String.valueOf(UPDname.getText());
@@ -257,14 +297,3 @@ public class Dashboard_Activity extends AppCompatActivity {
 //
 //
 //
-
-                }
-            });
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.show();
-
-
-        }
-    }
-
-}
